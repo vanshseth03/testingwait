@@ -1,0 +1,448 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JungliBear - Quality Products for Your Home</title>
+    <meta name="description" content="Discover premium home goods with free store pickup and affordable home delivery available.">
+    <link rel="stylesheet" href="styleshome.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Creepster&display=swap" rel="stylesheet">
+    <style>
+  /* Search bar styles */
+  .search-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 400px;
+    margin: 0 1rem;
+  }
+
+  .search-container input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    font-size: 0.9rem;
+  }
+
+  .search-container button {
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-container button:hover {
+    background-color: #1E3A8A;
+  }
+
+  /* Make the header responsive */
+  @media (max-width: 768px) {
+    .header .container {
+      flex-wrap: wrap;
+    }
+    
+    .search-container {
+      order: 3;
+      margin: 0.5rem 0;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+  /* Fixed header layout - stop position exchange */
+  .header .container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    gap: 15px;
+  }
+
+  .logo {
+    grid-column: 1;
+  }
+
+  .search-container {
+    grid-column: 2;
+    width: 100%;
+    max-width: 400px;
+    justify-self: center;
+  }
+
+  .cart-icon {
+    grid-column: 3;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .header .container {
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+    }
+    
+    .logo {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    
+    .cart-icon {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    
+    .search-container {
+      grid-column: 1 / span 2;
+      grid-row: 2;
+      max-width: 100%;
+      margin-top: 10px;
+    }
+  }
+  </style>
+  </head>
+  <body>
+    <div class="announcement-bar">
+      <div class="marquee-container">
+        <div class="marquee-content">
+          <span>For any confusion or questions, contact us on +91 9654358142</span>
+          <span class="separator">●</span>
+          <span>Free delivery on all orders above ₹1000</span>
+          <span class="separator">●</span>
+          <span>Store pickup available at label i002 ajnara integrity</span>
+          <span class="separator">●</span>
+          <span>For any confusion or questions, contact us on +91 9654358142</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="top-bar">
+      <div class="container">
+        <div class="contact-info">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>+91 9654358142</span>
+        </div>
+        <div class="social-icons">
+          <span>Connect with us:</span>
+          <a href="https://www.instagram.com/tanya.wadhwa" target="_blank" title="Follow us on Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <header class="header">
+      <div class="container">
+        <div class="logo">
+          <h1>JungliBear</h1>
+        </div>
+            <!-- Add this search bar -->
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search products...">
+        <button id="searchButton">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+      
+        <div class="cart-icon" id="cartIcon">
+          <span class="cart-count" id="cartCount">0</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Carousel -->
+      <section class="hero-carousel">
+        <div class="carousel-container" id="carousel">
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Carousel slides will be inserted here by JavaScript -->
+          </div>
+          <button class="carousel-button prev" id="prevButton" aria-label="Previous slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button class="carousel-button next" id="nextButton" aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Main Content Section -->
+      <section class="main-content">
+        <div class="container">
+          <div class="filter-controls">
+            <div class="filter-buttons">
+              <button class="filter-btn" id="filterBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                Filters
+              </button>
+              <button class="filter-btn active" data-category="all">All</button>
+              <!-- More filter buttons will be generated from JavaScript -->
+            </div>
+          </div>
+
+          <div class="product-grid" id="productGrid">
+            <!-- Products will be populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <div class="load-more-container">
+        <button id="loadMoreBtn" class="button">Load More</button>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; <span id="currentYear"></span> JungliBear. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Your Cart</h2>
+          <button class="close-button" id="closeCartButton">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="cartItems" class="cart-items">
+            <!-- Cart items will be populated by JavaScript -->
+          </div>
+          <div id="emptyCartMessage" class="empty-cart-message">
+            Your cart is empty. Continue shopping to add items.
+          </div>
+          <h3>Contact Information</h3>
+          <div id="checkoutForm" class="checkout-form">
+            <div class="form-group">
+            <label for="name">Full Name <span class="required">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name">
+            <small class="error-message" id="nameError"></small>
+            </div>
+              
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="Enter your 10-digit phone number">
+              <small class="error-message" id="phoneError"></small>
+            </div>
+            <div class="form-group">
+              <label for="address">Delivery Address <span class="required">*</span></label>
+              <textarea id="address" name="address" rows="3" placeholder="Enter your complete delivery address"></textarea>
+              <small class="error-message" id="addressError"></small>
+            </div>
+            <div class="form-group">
+              <label>Delivery Options <span class="required">*</span></label>
+              <div class="delivery-options">
+                <label class="delivery-option">
+                  <input type="radio" name="deliveryOption" value="store-pickup">
+                  <div>
+                    <span class="delivery-title">Store Pickup (Free)</span>
+                    <span class="delivery-description">Pick up your order from our store: label i002 ajnara integrity</span>
+                  </div>
+                </label>
+                <label class="delivery-option">
+                  <input type="radio" name="deliveryOption" value="home-delivery">
+                  <div>
+                    <span class="delivery-title">Home Delivery</span>
+                    <span class="delivery-description">Delivery charges: ₹10 per kilometer from our store</span>
+                    <span class="delivery-promo">Free delivery on orders above ₹1000!</span>
+                    <div id="homeDeliveryDetails" class="home-delivery-details hidden">
+                      <div class="form-group">
+                        <label for="society">Society/Locality Name <span class="required">*</span></label>
+                        <select id="society" name="society">
+                          <option value="">Select your society/locality</option>
+                          <option value="2">Green Valley Apartments (2 km)</option>
+                          <option value="4">Sunshine Enclave (4 km)</option>
+                          <option value="7">Royal Heights (7 km)</option>
+                          <option value="10">Golden Park Colony (10 km)</option>
+                          <option value="13">Silver Oaks Society (13 km)</option>
+                          <option value="others">Others</option>
+                        </select>
+                        <small class="error-message" id="societyError"></small>
+                      </div>
+                      <div class="delivery-fee-info">
+                        <span>Estimated Delivery Fee:</span>
+                        <span id="deliveryFee">₹0</span>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <small class="error-message" id="deliveryOptionError"></small>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="cart-summary">
+            <div class="summary-row">
+              <span>Subtotal:</span>
+              <span id="subtotal">₹0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Delivery:</span>
+              <span id="deliveryTotal">₹0.00</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total:</span>
+              <span id="orderTotal">₹0.00</span>
+            </div>
+          </div>
+          <button class="button checkout-button" id="checkoutButton">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="productModalTitle"></h2>
+          <button class="close-button" id="closeProductButton">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="product-modal-content">
+            <div class="product-image-container">
+              <div class="product-main-image">
+                <button class="image-nav-button prev" id="prevImageButton">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <img id="productModalImage" src="" alt="">
+                <button class="image-nav-button next" id="nextImageButton">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+              <div class="product-thumbnails" id="productThumbnails">
+                <!-- Thumbnails will be added by JavaScript -->
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-price" id="productModalPrice"></div>
+              <p class="product-description" id="productModalDescription"></p>
+              <div class="product-category">
+                Category: <span id="productModalCategory"></span>
+              </div>
+              <div class="product-availability" id="productModalAvailability"></div>
+              <div class="product-actions">
+                <div class="quantity-control">
+                  <button class="quantity-button decrease" id="decreaseQuantity">-</button>
+                  <input type="number" id="productQuantity" value="1" min="1" max="10">
+                  <button class="quantity-button increase" id="increaseQuantity">+</button>
+                </div>
+                <div class="action-buttons">
+                  <button class="button add-to-cart-button" id="addToCartButton">Add to Cart</button>
+                  <button class="button button-outline" id="shareProductButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="18" cy="5" r="3"></circle>
+                      <circle cx="6" cy="12" r="3"></circle>
+                      <circle cx="18" cy="19" r="3"></circle>
+                      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                    Share
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Order Confirmation</h2>
+          <button class="close-button" id="closeConfirmationButton">&times;</button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="success-icon">
+            <img src="https://cdn.pixabay.com/animation/2023/10/13/04/26/04-26-56-532_512.gif" width="120" height="120" alt="Green tick animation">
+          </div>
+          <h3>Thank You for Your Order!</h3>
+          <p id="confirmation-message">Your order has been successfully placed.</p>
+          <div class="order-details" id="confirmationDetails">
+            <!-- Order details will be populated by JavaScript -->
+          </div>
+          <p class="note">Tanaya Wadhwa (Store Manager) will contact you soon for further size and color information, if any, and will be delivering your order soon. Thanks!</p>
+        </div>
+        <div class="modal-footer">
+          <button class="button" id="continueShopping">Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Filter Modal -->
+    <div class="modal filter-modal" id="filterModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Filters</h2>
+          <div class="modal-actions">
+            <button id="resetFilter" class="reset-filter">Reset filter</button>
+            <button class="close-button" id="closeFilterButton">&times;</button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <!-- Add this to your filter modal section -->
+  <div class="filter-section">
+      <h3>Price Range</h3>
+      <div class="price-range-container">
+        
+        <input type="range" id="minPriceRange" min="0" max="10000" step="100" value="0" class="price-slider"  >
+        <label for="" style="font-size: 30px;">-</label>
+        <input type="range" id="maxPriceRange" min="0" max="10000" step="100" value="10000" class="price-slider">
+        <div class="price-range-values">
+          <span>₹<span id="minPriceValue">0</span></span>
+          <span>₹<span id="maxPriceValue">10000</span></span>
+        </div>
+      </div>
+    </div>
+          
+          <div class="filter-section">
+            <h3>Categories</h3>
+            <div class="filter-options" id="filterOptions">
+              <!-- Categories will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="button apply-filter-button" id="applyFilterButton">APPLY FILTER</button>
+        </div>
+      </div>
+    </div>
+  <!-- Simple notification element -->
+  <div id="simpleNotification" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #3b82f6; color: white; padding: 15px 20px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 9999;">
+    <span id="notificationText"></span>
+  </div>
+  <!-- Share notification element -->
+  <div id="shareNotification" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #3B82F6; color: white; padding: 15px 20px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 9999;">
+    <span id="shareNotificationText"></span>
+  </div>
+    <script src="productshome.js" ></script>
+    <script type= "module" src="scripthome.js"></script>
+  </body>
+  </html>

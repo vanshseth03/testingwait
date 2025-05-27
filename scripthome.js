@@ -1266,10 +1266,11 @@ function updateURLWithoutProductId() {
 // Share product
 async function shareProduct(product) {
   const url = `${window.location.origin}${window.location.pathname}?product=${product.id}`;
-  const title = `JungliBear - ${product.title}`;
-  const text = `🛍️ *${product.title}*\n\n📝 ${product.description}\n\n💰 Price: ₹${product.price}`;
   
-  // Try to share with image if available (keeping the original working method)
+  // Create the complete message text with all product details
+  const fullMessage = `🛍️ ${product.title}\n\n${product.description}\n\n💰 Price: ₹${product.price}\n\n🔗 ${url}`;
+  
+  // Try to share with image if available
   if (product.images && product.images.length > 0) {
     try {
       // Fetch the image as blob
@@ -1281,12 +1282,10 @@ async function shareProduct(product) {
         type: imageBlob.type
       });
       
-      // Check if we can share files
+      // Share with image and complete text
       if (navigator.canShare && navigator.canShare({ files: [imageFile] })) {
         await navigator.share({
-          title: title,
-          text: text,
-          url: url,
+          text: fullMessage,  // Put everything in text field
           files: [imageFile]
         });
         showShareNotification('Product shared successfully!');
@@ -1297,19 +1296,18 @@ async function shareProduct(product) {
     }
   }
   
-  // Fallback to text sharing
+  // Fallback to text-only sharing
   if (navigator.share) {
     try {
       await navigator.share({
-        title: title,
-        text: `${text}\n\n🔗 ${url}`
+        text: fullMessage
       });
       showShareNotification('Product shared successfully!');
     } catch (error) {
-      createShareFallbackOptions(url, title, text);
+      createShareFallbackOptions(url, product.title, fullMessage);
     }
   } else {
-    createShareFallbackOptions(url, title, text);
+    createShareFallbackOptions(url, product.title, fullMessage);
   }
 }
 // Create share fallback options

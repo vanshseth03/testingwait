@@ -1266,10 +1266,10 @@ function updateURLWithoutProductId() {
 // Share product
 async function shareProduct(product) {
   const url = `${window.location.origin}${window.location.pathname}?product=${product.id}`;
-  const title = `Check out ${product.title}`;
-  const text = `${product.description} - Only ₹${product.price}`;
+  const title = `JungliBear - ${product.title}`;
+  const text = `🛍️ *${product.title}*\n\n📝 ${product.description}\n\n💰 Price: ₹${product.price}`;
   
-  // Try to share with image if available
+  // Try to share with image if available (keeping the original working method)
   if (product.images && product.images.length > 0) {
     try {
       // Fetch the image as blob
@@ -1297,13 +1297,12 @@ async function shareProduct(product) {
     }
   }
   
-  // Fallback to text sharing with image URL
+  // Fallback to text sharing
   if (navigator.share) {
     try {
-      const shareText = `${text}\n\n🖼️ View image: ${product.images[0]}\n\n🔗 ${url}`;
       await navigator.share({
         title: title,
-        text: shareText
+        text: `${text}\n\n🔗 ${url}`
       });
       showShareNotification('Product shared successfully!');
     } catch (error) {

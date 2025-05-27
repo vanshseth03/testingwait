@@ -1269,37 +1269,43 @@ async function shareProduct(product) {
   const title = `Check out ${product.title}`;
   const text = `${product.description} - Only ₹${product.price}`;
   
-  // Check if Web Share API supports files and if there's an image
-  if (navigator.canShare && product.images && product.images.length > 0) {
+  // Try to share with image if available
+  if (product.images && product.images.length > 0) {
     try {
-      // Fetch the image and convert to blob
-      const response = await fetch(product.images[0]);
-      const blob = await response.blob();
-      const file = new File([blob], `${product.title}.jpg`, { type: blob.type });
+      // Fetch the image as blob
+      const imageResponse = await fetch(product.images[0]);
+      const imageBlob = await imageResponse.blob();
       
-      // Check if sharing with files is supported
-      if (navigator.canShare({ files: [file] })) {
+      // Create a file from the blob
+      const imageFile = new File([imageBlob], `${product.title.replace(/[^a-zA-Z0-9]/g, '_')}.jpg`, {
+        type: imageBlob.type
+      });
+      
+      // Check if we can share files
+      if (navigator.canShare && navigator.canShare({ files: [imageFile] })) {
         await navigator.share({
           title: title,
           text: text,
           url: url,
-          files: [file]
+          files: [imageFile]
         });
+        showShareNotification('Product shared successfully!');
         return;
       }
     } catch (error) {
-      console.log('Image sharing failed, falling back to text share');
+      console.log('Failed to share with image:', error);
     }
   }
   
-  // Fallback to text-only sharing
+  // Fallback to text sharing with image URL
   if (navigator.share) {
     try {
+      const shareText = `${text}\n\n🖼️ View image: ${product.images[0]}\n\n🔗 ${url}`;
       await navigator.share({
         title: title,
-        text: `${text}\n\nImage: ${product.images[0]}\n\n${url}`,
-        url: url
+        text: shareText
       });
+      showShareNotification('Product shared successfully!');
     } catch (error) {
       createShareFallbackOptions(url, title, text);
     }
@@ -1307,7 +1313,6 @@ async function shareProduct(product) {
     createShareFallbackOptions(url, title, text);
   }
 }
-
 // Create share fallback options
 function createShareFallbackOptions(url, title, text) {
   // Copy URL to clipboard

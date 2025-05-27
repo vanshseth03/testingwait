@@ -1264,33 +1264,46 @@ function updateURLWithoutProductId() {
 }
 
 // Share product
-function shareProduct(product) {
+async function shareProduct(product) {
   const url = `${window.location.origin}${window.location.pathname}?product=${product.id}`;
   const title = `Check out ${product.title}`;
   const text = `${product.description} - Only ₹${product.price}`;
-  const imageUrl = product.images && product.images.length > 0 ? product.images[0] : '';
   
-  // Use Web Share API if available
-    if (navigator.share) {
-    const shareData = {
-      title: title,
-      text: text,
-      url: url
-    };
-    
-    // Add image if available
-    if (imageUrl) {
-      shareData.files = [new File([imageUrl], 'product-image.jpg', { type: 'image/jpeg' })];
+  // Check if Web Share API supports files and if there's an image
+  if (navigator.canShare && product.images && product.images.length > 0) {
+    try {
+      // Fetch the image and convert to blob
+      const response = await fetch(product.images[0]);
+      const blob = await response.blob();
+      const file = new File([blob], `${product.title}.jpg`, { type: blob.type });
+      
+      // Check if sharing with files is supported
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: title,
+          text: text,
+          url: url,
+          files: [file]
+        });
+        return;
+      }
+    } catch (error) {
+      console.log('Image sharing failed, falling back to text share');
     }
-    
-    navigator.share(shareData)
-    .then(() => console.log('Shared successfully'))
-    .catch(err => {
-      console.error('Share error:', err);
+  }
+  
+  // Fallback to text-only sharing
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: title,
+        text: `${text}\n\nImage: ${product.images[0]}\n\n${url}`,
+        url: url
+      });
+    } catch (error) {
       createShareFallbackOptions(url, title, text);
-    });
+    }
   } else {
-    // Fallback for browsers that don't support Web Share API
     createShareFallbackOptions(url, title, text);
   }
 }

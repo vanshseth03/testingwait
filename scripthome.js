@@ -1273,7 +1273,7 @@ async function shareProduct(product) {
   // Try to share with image if available
   if (product.images && product.images.length > 0) {
     try {
-      // Fetch the image as blob
+      // Fetch the image as blob from cached website data
       const imageResponse = await fetch(product.images[0]);
       const imageBlob = await imageResponse.blob();
       
@@ -1282,10 +1282,11 @@ async function shareProduct(product) {
         type: imageBlob.type
       });
       
-      // Share with image and complete text
+      // Try sharing with both text and image first
       if (navigator.canShare && navigator.canShare({ files: [imageFile] })) {
         await navigator.share({
-          text: fullMessage,  // Put everything in text field
+          title: `${product.title} - JungliBear`,
+          text: fullMessage,
           files: [imageFile]
         });
         showShareNotification('Product shared successfully!');
@@ -1296,10 +1297,11 @@ async function shareProduct(product) {
     }
   }
   
-  // Fallback to text-only sharing
+  // If image sharing fails, try text-only sharing
   if (navigator.share) {
     try {
       await navigator.share({
+        title: `${product.title} - JungliBear`,
         text: fullMessage
       });
       showShareNotification('Product shared successfully!');
